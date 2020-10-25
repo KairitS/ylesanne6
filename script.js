@@ -141,10 +141,15 @@ function GetMap() {
             28.199308
         );
 
+    var centerpoint = new Microsoft.Maps.Location(
+            58.851793,
+            26.940269
+        );
+
     map = new Microsoft.Maps.Map("#map", {
         credentials: mapAPIKey,
-        center: centerPoint,
-        zoom: 10,
+        center: centerpoint,
+        zoom: 7,
         mapTypeId: Microsoft.Maps.MapTypeId.road,
         disablePanning: true
     });
@@ -170,8 +175,8 @@ function GetMap() {
         description: 'Tartu Ülikooli koosseisu kuuluv kõrgkool'
     });
 
-    Microsoft.Maps.Events.addHandler(tartupushpin, 'click', pushpinClicked);
-    Microsoft.Maps.Events.addHandler(narvapushpin, 'click', pushpinClicked);
+    Microsoft.Maps.Events.addHandler(tartupushpin, 'click', function () { infoboxtartu.setMap(map); });
+    Microsoft.Maps.Events.addHandler(narvapushpin, 'click', function () { infoboxnarva.setMap(map); });
 
     map.entities.push(tartupushpin)
     map.entities.push(narvapushpin);
